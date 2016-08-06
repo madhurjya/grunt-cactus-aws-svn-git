@@ -3,7 +3,15 @@ Thumbs.db
 ehthumbs.db
 
 # Folder config file
+
 Desktop.ini
+/bower_components
+/dist
+/node_modules
+/.svn
+/.idea
+/app/.svn
+
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
