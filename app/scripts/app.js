@@ -3,7 +3,7 @@
 angular.module('Home', []);
 angular.module('myApp', []);
 angular.module('config', []);
-angular.module('retail', []);
+//angular.module('retail', []);
 angular.module('bankModel', []);
 var serviceAdmin = angular.module('services.admin', []);
 angular.module('cactusApp', [

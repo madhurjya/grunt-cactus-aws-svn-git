@@ -1,4 +1,4 @@
-<div ng-controller="retailController as rc">
+<div ng-controller="retailController as vm">
   <div ng-cloak>
     <md-content>
       <md-tabs md-dynamic-height md-border-bottom>
@@ -38,7 +38,7 @@
                   <th>Operation</th>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="materialGroup in model.materialGroups | filter : materialGroupSearch" ng-include="getTemplate('group',materialGroup)">
+                  <tr ng-repeat="materialGroup in vm.model.materialGroups | filter : materialGroupSearch" ng-include="vm.getTemplate('group',materialGroup)">
                   </tr>
                   </tbody>
                 </table>
@@ -48,7 +48,7 @@
                   <td>{{materialGroup.groupDescription}}</td>
                   <td>{{materialGroup.createDate}}</td>
                   <td>
-                    <button class="btn btn-xs btn-primary" ng-click="editMaterialGroup('group',materialGroup)">Edit</button>
+                    <button class="btn btn-xs btn-primary" ng-click="vm.editMaterialGroup('group',materialGroup)">Edit</button>
                   </td>
                 </script>
                 <script type="text/ng-template" id="edit">
@@ -72,8 +72,8 @@
                     </md-input-container>
                   </td>
                   <td>
-                    <button class="btn btn-xs btn-primary" ng-click="saveMaterialGroup('group',$index)">Save</button>
-                    <button class="btn btn-xs btn-warning" ng-click="reset('group')">Cancel</button>
+                    <button class="btn btn-xs btn-primary" ng-click="vm.saveMaterialGroup('group',$index)">Save</button>
+                    <button class="btn btn-xs btn-warning" ng-click="vm.reset('group')">Cancel</button>
                   </td>
                 </script>
 
@@ -82,7 +82,7 @@
 
               <uib-accordion-group heading="Material">
                 <div class="material-group-search">
-                  <span ng-click="addMaterialGroupMaterial('material')" class="material-add">
+                  <span ng-click="vm.addMaterialGroupMaterial('material')" class="material-add">
                     <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                   </span>
                   <md-input-container>
@@ -97,7 +97,7 @@
                   <th>Operation</th>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="materialGroup in modelMaterial.materials | filter : materialSearch" ng-include="getTemplate('material',materialGroup)">
+                  <tr ng-repeat="materialGroup in vm.modelMaterial.materials | filter : materialSearch" ng-include="vm.getTemplate('material',materialGroup)">
                   </tr>
                   </tbody>
                 </table>
@@ -106,24 +106,24 @@
                   <td>{{materialGroup.name}}</td>
                   <td>{{materialGroup.glcode}}</td>
                   <td>
-                    <button class="btn btn-xs btn-primary" ng-click="editMaterialGroup('material',materialGroup)">Edit</button>
+                    <button class="btn btn-xs btn-primary" ng-click="vm.editMaterialGroup('material',materialGroup)">Edit</button>
                   </td>
                 </script>
                 <script type="text/ng-template" id="editMat">
                   <td>
                     <md-input-container>
                       <label>Material Group Code</label>
-                      <input type="text" ng-model="modelMaterial.selected.name" />
+                      <input type="text" ng-model="vm.modelMaterial.selected.name" />
                     </md-input-container>
                   </td>
                   <td>
                     <md-input-container>
                       <label>Material Group Description</label>
-                      <input type="text" ng-model="modelMaterial.selected.glcode" />
+                      <input type="text" ng-model="vm.modelMaterial.selected.glcode" />
                     </md-input-container>
                   </td>
                   <td>
-                    <button class="btn btn-xs btn-primary" ng-click="saveMaterialGroup('material',$index)">Save</button>
+                    <button class="btn btn-xs btn-primary" ng-click="vm.saveMaterialGroup('material',$index)">Save</button>
                     <button class="btn btn-xs btn-warning" ng-click="reset('material')">Cancel</button>
                   </td>
                 </script>

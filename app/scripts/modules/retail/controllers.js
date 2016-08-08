@@ -1,30 +1,34 @@
 /**
  * Created by Madhurjya on 6/13/2016.
  */
-'use strict';
-angular.module('retail', ['bankModel', 'ngMaterial', 'ngMaterialDatePicker'])
-  .controller('retailController', ['$scope',
-    '$http',
-    '$rootScope',
-    '$timeout',
-    '$mdSidenav',
-    '$log',
-    '$mdToast',
-    'serviceRetailProfile',
-    '$interval',
-    '$mdDialog',
-    function($scope, $http, $rootScope, $timeout, $mdSidenav, $log, $mdToast, serviceRetailProfile, $interval, $mdDialog) {
 
-      function init() {
-        serviceRetailProfile.materialGroup().get({
+
+
+(function() {
+'use strict';
+  angular
+    .module('retail', ['bankModel','ngMaterial','ngMaterialDatePicker'])
+    .controller('retailController', retailController);
+
+  retailController.$inject = ['$http','$rootScope','$timeout','$mdSidenav','$log','$mdToast','serviceRetailProfile','$interval','$mdDialog',];
+  function retailController($scope, $http, $rootScope, $timeout, $mdSidenav, $log, $mdToast, serviceRetailProfile, $interval, $mdDialog) {
+    var vm = this;
+
+    this. materialGroupService =  serviceRetailProfile.materialGroup();
+
+    activate();
+
+    ////////////////
+   
+    function activate() {
+      this.materialGroupService.get({
           "serviceUrl": "getMaterialGroup",
           "bid": "1"
         }, function(data) {
-          $scope.model.materialGroups = data.branchBean.materialGroups;
+          this.model.materialGroups = data.branchBean.materialGroups;
         });
+     }
 
-      }
-      init();
       this.sampleAction = function(name, ev) {
         $mdDialog.show($mdDialog.alert()
           .title(name)
@@ -35,8 +39,21 @@ angular.module('retail', ['bankModel', 'ngMaterial', 'ngMaterialDatePicker'])
       };
 
 
-      //inline editable code
-      $scope.modelMaterial = {
+  this.addMaterialGroupMaterial = function(sec) {
+          if (this.model.materialGroups[0].name !== undefined && this.model.materialGroups[0].glcode !== undefined && sec === "group") {
+            this.model.materialGroups.unshift({
+              "materialGrpId": 0
+            });
+            this.editMaterialGroup("group", this.model.materialGroups[0]);
+          } else if (this.modelMaterial.materials[0].name !== undefined && this.modelMaterial.materials[0].glcode !== undefined && sec === "material") {
+            this.modelMaterial.materials.unshift({
+              "id": this.modelMaterial.materials.length
+            });
+            this.editMaterialGroup("material", this.modelMaterial.materials[0]);
+          }
+        }
+//inline editable code
+      this.modelMaterial = {
         materials: [{
           id: 0,
           name: "Ben",
@@ -57,66 +74,90 @@ angular.module('retail', ['bankModel', 'ngMaterial', 'ngMaterialDatePicker'])
         selected: {}
       };
 
-      $scope.model = {
+      this.model = {
         materialGroups: [],
         selected: {}
       };
-      $scope.addMaterialGroupMaterial = function(sec) {
-          if ($scope.model.materialGroups[0].name !== undefined && $scope.model.materialGroups[0].glcode !== undefined && sec === "group") {
-            $scope.model.materialGroups.unshift({
-              "materialGrpId": 0
-            });
-            $scope.editMaterialGroup("group", $scope.model.materialGroups[0]);
-          } else if ($scope.modelMaterial.materials[0].name !== undefined && $scope.modelMaterial.materials[0].glcode !== undefined && sec === "material") {
-            $scope.modelMaterial.materials.unshift({
-              "id": $scope.modelMaterial.materials.length
-            });
-            $scope.editMaterialGroup("material", $scope.modelMaterial.materials[0]);
-          }
-        }
+
+
         // gets the template to ng-include for a table row / item
-      $scope.getTemplate = function(sec, material) {
+      this.getTemplate = function(sec, material) {
         if (sec === 'material') {
-          if (material.id === $scope.modelMaterial.selected.id) return 'editMat';
+          if (material.id === this.modelMaterial.selected.id) return 'editMat';
           else return 'displayMat';
         } else if (sec === 'group') {
-          if (material.materialGrpId === $scope.model.selected.materialGrpId) return 'edit';
+          if (material.materialGrpId === this.model.selected.materialGrpId) return 'edit';
           else return 'display';
         }
 
       };
 
-      $scope.editMaterialGroup = function(sec, material) {
+
+     this.editMaterialGroup = function(sec, material) {
         if (sec === "material") {
-          $scope.modelMaterial.selected = angular.copy(material);
+          this.modelMaterial.selected = angular.copy(material);
         } else if (sec === "group") {
-          $scope.model.selected = angular.copy(material);
+         this.model.selected = angular.copy(material);
         }
 
       };
 
-      $scope.saveMaterialGroup = function(sec, idx) {
+      this.saveMaterialGroup = function(sec, idx) {
         if (sec === "material") {
-          $scope.modelMaterial.materials[idx] = angular.copy($scope.modelMaterial.selected);
-          $scope.reset("material");
+         this.modelMaterial.materials[idx] = angular.copy(this.modelMaterial.selected);
+          this.reset("material");
 
         } else if (sec === "group") {
-          $scope.model.materialGroups[idx] = angular.copy($scope.model.selected);
-          $scope.reset("group");
+         this.model.materialGroups[idx] = angular.copy(this.model.selected);
+          this.reset("group");
         }
 
       };
 
-      $scope.reset = function(sec) {
+      this.reset = function(sec) {  ``
         if (sec === "material") {
-          $scope.modelMaterial.selected = {};
+          this.modelMaterial.selected = {};
         } else if (sec === "group") {
-          $scope.model.selected = {};
+          this.model.selected = {};
         }
 
       };
+
+  }
+})();
+
+
+
+
+
+/*
+
+angular.module('retail', ['bankModel', 'ngMaterial', 'ngMaterialDatePicker'])
+  .controller('retailController', ['$scope',
+    '$http',
+    '$rootScope',
+    '$timeout',
+    '$mdSidenav',
+    '$log',
+    '$mdToast',
+    'serviceRetailProfile',
+    '$interval',
+    '$mdDialog',
+    function($scope, $http, $rootScope, $timeout, $mdSidenav, $log, $mdToast, serviceRetailProfile, $interval, $mdDialog) {
+
+      
+     
+
+
+      
+    
+      
+
+
+     
+     
 
 
 
     }
-  ])
+  ])*/
