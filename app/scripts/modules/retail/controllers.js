@@ -22,11 +22,7 @@
           vm.model.materialGroups = data.branchBean.materialGroups;
           vm.modelMaterial.materials = data.branchBean.materialGroups;
         });
-
-        
-     }
-      
-     
+  }
       vm.sampleAction = function(name, ev) {
         $mdDialog.show($mdDialog.alert()
           .title(name)

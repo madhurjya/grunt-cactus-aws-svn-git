@@ -91,36 +91,53 @@
                     <input type="text" ng-model="materialSearch" />
                   </md-input-container>
                 </div>
-                <table class="table material-group-table">
+
+                 <uib-accordion-group ng-repeat="materialGroup in vm.modelMaterial.materials | filter : materialSearch" heading="{{materialGroup.groupName}}->{{materialGroup.groupDescription}}">
+                   <table class="table material-group-table">
                   <thead>
-                  <th>Material Group Code</th>
-                  <th>Material Group Description</th>
+                    <th>Sl</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Stock Balance</th>
+                  <th>stock In</th>
+                  <th>stock Out</th>
+                  <th>MRP</th>
                   <th>Operation</th>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="materialGroup in vm.modelMaterial.materials | filter : materialSearch" ng-include="vm.getTemplate('material',materialGroup)">
+                  <tr ng-repeat="mat in materialGroup.materials | filter : materialSearch" ng-include="vm.getTemplate('material',mat)">
+                  
+                  
+                  
                   </tr>
                   </tbody>
                 </table>
+                  </uib-accordion-group>
+               
 
                 <script type="text/ng-template" id="displayMat">
-                  <td>{{materialGroup.groupName}}</td>
-                  <td>{{materialGroup.groupDescription}}</td>
+                  <td>{{$index+1}}</td>
+                  <td>{{mat.materialName}}</td>
+                  <td>{{mat.materialDescription}}</td>
+                  <td>{{mat.stockBalance}} {{mat.uom}}</td>
+                  <td>{{mat.stockIn}} {{mat.uom}}</td>
+                  <td>{{mat.stockOut}} {{mat.uom}}</td>
+                  <td><i class="fa fa-inr" aria-hidden="true"></i>{{mat.mrp}}</td>
                   <td>
-                    <button class="btn btn-xs btn-primary" ng-click="vm.editMaterialGroup('material',materialGroup)">Edit</button>
+                    <button class="btn btn-xs btn-primary" ng-click="vm.editMaterialGroup('material',mat)">Edit</button>
                   </td>
                 </script>
                 <script type="text/ng-template" id="editMat">
                   <td>
                     <md-input-container>
-                      <label>Material Group Code</label>
-                      <input type="text" ng-model="vm.modelMaterial.selected.name" />
+                      <label>Material Code</label>
+                      <input type="text" ng-model="{mat.materialName" />
                     </md-input-container>
                   </td>
                   <td>
                     <md-input-container>
-                      <label>Material Group Description</label>
-                      <input type="text" ng-model="vm.modelMaterial.selected.glcode" />
+                      <label>Material Description</label>
+                      <input type="text" ng-model="mat.materialDescription" />
                     </md-input-container>
                   </td>
                   <td>
