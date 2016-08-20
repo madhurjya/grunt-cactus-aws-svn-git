@@ -1,15 +1,22 @@
+//retail controller
  /**
  * Created by Madhurjya on 6/13/2016.
  */
 (function() {
 'use strict';
   angular
-    .module('retail', ['bankModel','ngMaterial','ngMaterialDatePicker','retailDirective'])
-    .controller('retailController', retailController);
-
+    .module('retail', ['bankModel','ngMaterial','ngMaterialDatePicker','retailInvoice'])
+    .controller('retailController', retailController)
+    
   retailController.$inject = ['$scope','$http','$rootScope','$timeout','$mdSidenav','$log','$mdToast','serviceRetailProfile','$interval','$mdDialog'];
   function retailController($scope, $http, $rootScope, $timeout, $mdSidenav, $log, $mdToast, serviceRetailProfile, $interval, $mdDialog) {
     var vm = this;
+
+    //transection Tab Start
+vm.transectionMode = true;
+    //transection Tab End
+
+
 
     vm.materialGroupService =  serviceRetailProfile.materialGroup();
     vm.materialService =  serviceRetailProfile.materials();
@@ -101,5 +108,11 @@
 
       };
 
-  }
+  };
+  
+
+
+
 })();
+
+//
