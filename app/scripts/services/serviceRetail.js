@@ -2,7 +2,7 @@
  * Created by Madhurjya on 6/21/2016.
  */
 'use strict';
-var isLocalEnv = true;
+var isLocalEnv = false;
 //var ip = "52.36.18.167";
 //var ip = "52.38.174.233";
 var ip = "52.36.207.255";

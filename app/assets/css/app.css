@@ -605,7 +605,7 @@ md-progress-circular{
 .menuBardemoBasicUsage .page p {
   line-height: 1.6rem; }
 /* switch CSS*/
-input[type="checkbox"] { 
+input[type="checkbox"].ios-switch { 
 	position: absolute;
 	opacity: 0;
 }

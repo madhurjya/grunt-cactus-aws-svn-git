@@ -5,24 +5,19 @@
         <md-tab label="Transection">
           <md-content class="md-padding">
             <label><input type="checkbox" class="ios-switch tinyswitch" checked /><div><div></div></div></label>
-            <div class="invoice-height pull-right">  <invoice></invoice></div>
-           
-          
+            <div class="invoice-height pull-right">
+              <invoice></invoice>
+            </div>
           </md-content>
         </md-tab>
         <md-tab label="two">
           <md-content class="md-padding">
             <h1 class="md-display-2">Tab Two</h1>
-
-         
-
-
           </md-content>
         </md-tab>
         <md-tab label="Setup">
           <md-content class="md-padding">
-
-            <uib-accordion close-others="oneAtATime">
+             <uib-accordion close-others="oneAtATime">
               <uib-accordion-group heading="Material Group">
                 <div class="material-group-search">
                   <span ng-click="vm.addMaterialGroupMaterial('group')" class="material-add">
@@ -35,14 +30,14 @@
                 </div>
                 <table class="table material-group-table">
                   <thead>
-                  <th>Material Group Code</th>
-                  <th>Material Group Description</th>
-                  <th>Create Date</th>
-                  <th>Operation</th>
+                    <th>Material Group Code</th>
+                    <th>Material Group Description</th>
+                    <th>Create Date</th>
+                    <th>Operation</th>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="materialGroup in vm.model.materialGroups | filter : materialGroupSearch" ng-include="vm.getTemplate('group',materialGroup)">
-                  </tr>
+                    <tr ng-repeat="materialGroup in vm.model.materialGroups | filter : materialGroupSearch" ng-include="vm.getTemplate('group',materialGroup)">
+                    </tr>
                   </tbody>
                 </table>
 
@@ -70,8 +65,7 @@
                   <td>
                     <md-input-container>
                       <label>Create Date</label>
-                      <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime"
-                             placeholder="Date" min-date="date" ng-model="model.selected.createDate" class=" md-input">
+                      <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Date" min-date="date" ng-model="model.selected.createDate" class=" md-input">
                     </md-input-container>
                   </td>
                   <td>
@@ -94,28 +88,28 @@
                   </md-input-container>
                 </div>
 
-                 <uib-accordion-group ng-repeat="materialGroup in vm.modelMaterial.materials | filter : materialSearch" heading="{{materialGroup.groupName}}->{{materialGroup.groupDescription}}">
-                   <table class="table material-group-table">
-                  <thead>
-                    <th>Sl</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Stock Balance</th>
-                  <th>stock In</th>
-                  <th>stock Out</th>
-                  <th>MRP</th>
-                  <th>Operation</th>
-                  </thead>
-                  <tbody>
-                  <tr ng-repeat="mat in materialGroup.materials | filter : materialSearch" ng-include="vm.getTemplate('material',mat)">
-                  
-                  
-                  
-                  </tr>
-                  </tbody>
-                </table>
-                  </uib-accordion-group>
-               
+                <uib-accordion-group ng-repeat="materialGroup in vm.modelMaterial.materials | filter : materialSearch" heading="{{materialGroup.groupName}}->{{materialGroup.groupDescription}}">
+                  <table class="table material-group-table">
+                    <thead>
+                      <th>Sl</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Stock Balance</th>
+                      <th>stock In</th>
+                      <th>stock Out</th>
+                      <th>MRP</th>
+                      <th>Operation</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="mat in materialGroup.materials | filter : materialSearch" ng-include="vm.getTemplate('material',mat)">
+
+
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </uib-accordion-group>
+
 
                 <script type="text/ng-template" id="displayMat">
                   <td>{{$index+1}}</td>
